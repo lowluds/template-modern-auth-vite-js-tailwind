@@ -1,5 +1,110 @@
+/* Google font, Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ---------- Design tokens via CSS variables ---------- */
+:root{
+  --accent-color: #8672FF;
+  --base-color: #ffffff;
+  --text-color: #2E2B41;
+  --input-color: #F3F0FF;
+  --error-color: #f06272;
+}
 
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    font-family: Poppins, ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    font-size: 12pt;
+    color: var(--text-color);
+  }
+  a { color: var(--accent-color); }
+  a:hover { text-decoration: underline; }
+}
+
+/* ---------- Components that mirror your vanilla CSS ---------- */
+@layer components {
+  /* Card container */
+  .card {
+    @apply w-full max-w-md rounded-2xl p-6 md:p-8 bg-white shadow transition;
+    @apply hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  /* Field wrapper and layout */
+  .field { position: relative; }
+  .input-row { @apply flex items-stretch; }
+
+  /* Left icon tile */
+  .input-icon {
+    @apply flex items-center justify-center w-12 rounded-l-lg text-white transition;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    fill: currentColor;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  /* Input control */
+  .input-control {
+    @apply w-full h-12 px-4 rounded-r-lg outline-none transition;
+    @apply border border-gray-300;                /* initial border */
+    background-color: var(--input-color);
+    border-color: var(--input-color);
+    min-width: 0; /* prevent overflow in flex */
+  }
+
+  /* Helper text for errors */
+  .error-text { @apply mt-1 text-sm text-red-600 hidden; }
+
+  /* Required field indicator - only show when validation fails */
+  .field.incorrect label::after { 
+    content: '*'; 
+    margin-left: 0.25rem; 
+    color: #dc2626; /* red-600 */
+  }
+
+  /* Primary button styled like your demo */
+  .btn-primary {
+    @apply mt-2 border-0 rounded-full px-8 py-3 text-white font-semibold uppercase cursor-pointer transition;
+    background-color: var(--accent-color);
+  }
+  .btn-primary:hover,
+  .btn-primary:focus { background-color: var(--text-color); }
+}
+
+/* ---------- Interaction states, pure CSS where possible ---------- */
+@layer utilities {
+  /* Hover effects */
+  .field:hover .input-control { @apply border-indigo-400; background-color: color-mix(in srgb, var(--input-color) 80%, #6366f1 20%); }
+  .field:hover label { @apply text-indigo-700; }
+  .field:hover .input-icon { background-color: color-mix(in srgb, var(--accent-color) 80%, #6366f1 20%); }
+
+  /* Focus effects */
+  .field:focus-within .input-control { @apply ring-2 ring-indigo-500 border-indigo-500; }
+  .field:focus-within label { @apply text-indigo-700; }
+  .field:focus-within .input-icon { background-color: var(--text-color); }
+
+  /* Placeholder color, matches your demo */
+  .input-control::placeholder { color: var(--text-color); }
+
+  /* Incorrect mode, set by JS or server, never on first load */
+  .field.incorrect label { color: #b91c1c; }           /* red-700 */
+  .field.incorrect .input-icon { background-color: var(--error-color); }
+  .field.incorrect .input-control { border-color: var(--error-color); color: #b91c1c; }
+  .field.incorrect .error-text { display: block; }
+}
+
+/* Optional, small wrapper look if you reuse outside the grid layout */
+.wrapper {
+  box-sizing: border-box;
+  background-color: var(--base-color);
+  padding: 10px;
+  border-radius: 0 20px 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

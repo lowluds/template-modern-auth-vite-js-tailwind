@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Tailwind Starter</title>
+    <meta name="description" content="Project starter template with Vite + Tailwind CSS" />
+    <link rel="icon" href="/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="/assets/css/tailwind.css" />
+    <script type="text/javascript" src="/assets/js/pages/login.js defer"></script>
+  </head>
+
+
+  <body class="relative bg-stone-50 min-h-[100svh] overflow-hidden">
+    <!-- Floating Header Navigation - Left Side Only -->
+    <div class="fixed top-0 left-0 z-50 backdrop-blur-sm border-b border-gray-200/30 shadow-sm" style="width: calc(40% - 2rem);">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6">
+        <div class="relative pt-6 pb-16 sm:pb-24">
+          <nav class="relative flex items-center justify-between sm:h-10 md:justify-center" aria-label="Global">
+            <div class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
+              <div class="flex items-center justify-between w-full md:w-auto">
+                <a href="index.html"><span class="sr-only">Company Name</span>
+                  <img class="w-auto h-8 sm:h-10" src="https://www.svgrepo.com/show/448244/pack.svg" loading="lazy" width="202" height="40">
+                </a>
+                <div class="flex items-center -mr-2 md:hidden">
+                  <button class="inline-flex items-center justify-center p-2 text-gray-400 bg-gray-50 rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-50" type="button" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="hidden md:flex md:space-x-10 list-none">
+              <li>
+                <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900" target="">Pricing</a>
+              </li>
+              <li>
+                <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900" target="">Gallary</a>
+              </li>
+              <li>
+                <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900" target="_blank">Blog</a>
+              </li>
+            </div>
+            <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
+              <div class="inline-flex rounded-full shadow">
+                <a href="/pages/login.html" class="inline-flex items-center px-4 py-2 text-base text-gray-900 bg-white border border-transparent rounded-full cursor-pointer font-base hover:bg-gray-50">
+                  Sign in
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- 40,60 split that fits the dynamic viewport height -->
+    <div class="grid min-h-[100svh] grid-cols-1 md:grid-cols-[2fr_3fr]">
+      
+      <!-- Left, form card -->
+      <section class="flex items-center justify-center p-4">
+        <div class="card">
+          <!-- Tabs -->
+          <div class="flex justify-between mb-6 border-b border-gray-200">
+            <button id="signInTab" class="w-1/2 text-center text-gray-600 pb-2 font-medium border-b-2 border-transparent hover:border-indigo-500 focus:outline-none transition">Sign In</button>
+            <button id="signUpTab" class="w-1/2 text-center text-gray-600 pb-2 font-medium border-b-2 border-transparent hover:border-indigo-500 focus:outline-none transition">Sign Up</button>
+          </div>
+
+          <form id="signInForm" class="space-y-4" role="form" aria-label="Sign in form">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+            <!-- Email -->
+            <div class="field" data-field>
+              <label for="signInEmail" class="block text-gray-700 font-medium mb-1">
+                Email
+                <span class="sr-only">Required field</span>
+              </label>
+              <div class="input-row">
+                <span class="input-icon" aria-hidden="true">
+                  <!-- Envelope icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                       class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M3 7l8.5 6a2 2 0 0 0 2 0L22 7"></path>
+                  </svg>
+                </span>
+                <input 
+                  id="signInEmail" 
+                  name="email" 
+                  type="email" 
+                  required
+                  aria-describedby="email-error"
+                  aria-invalid="false"
+                  placeholder="example@email.com"
+                  class="input-control" 
+                />
+              </div>
+              <div id="email-error" class="error-text" role="alert" aria-live="polite">
+                Please enter a valid email.
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="field" data-field>
+              <label for="signInPassword" class="block text-gray-700 font-medium mb-1">Password</label>
+              <div class="input-row">
+                <span class="input-icon" aria-hidden="true">
+                  <!-- Lock icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                          d="M16.5 10.5V7.5a4.5 4.5 0 0 0-9 0v3" />
+                    <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                  </svg>
+                </span>
+                <input id="signInPassword" name="password" type="password" required minlength="8"
+                       placeholder="••••••••"
+                       class="input-control" />
+              </div>
+              <p class="error-text">At least 8 characters.</p>
+            </div>
+
+            <!-- Extras -->
+            <div class="flex justify-between text-sm text-gray-600 pt-1">
+              <label class="flex items-center gap-2">
+                <input id="rememberMe" name="remember" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                <span>Remember me</span>
+              </label>
+              <a href="#" class="text-indigo-600 hover:underline">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg shadow-md hover:shadow-lg transition" id="signInButton">
+              <span class="button-text">Sign In</span>
+              <span class="button-loader hidden">
+                <svg class="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"/>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                </svg>
+                <span class="ml-2">Signing in...</span>
+              </span>
+            </button>
+          </form>
+
+          <!-- Sign Up, hidden by default, your JS can toggle -->
+          <form id="signUpForm" class="space-y-4 hidden mt-6">
+            <!-- Full Name -->
+            <div class="field" data-field>
+              <label for="signUpFullName" class="block text-gray-700 font-medium mb-1">Full Name</label>
+              <div class="input-row">
+                <span class="input-icon" aria-hidden="true">
+                  <!-- User icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                          d="M15.75 7.5a3.75 3.75 0 1 1-7.5 0a3.75 3.75 0 0 1 7.5 0zM4.5 19.5a7.5 7.5 0 0 1 15 0" />
+                  </svg>
+                </span>
+                <input id="signUpFullName" name="fullName" type="text" required
+                       placeholder="Firstname Lastname"
+                       class="input-control" />
+              </div>
+              <p class="error-text">Full name is required.</p>
+            </div>
+
+            <!-- Email -->
+            <div class="field" data-field>
+              <label for="signUpEmail" class="block text-gray-700 font-medium mb-1">Email</label>
+              <div class="input-row">
+                <span class="input-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                       class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8"
+                       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+                    <path d="M3 7l8.5 6a2 2 0 0 0 2 0L22 7"></path>
+                  </svg>
+                </span>
+                <input id="signUpEmail" name="email" type="email" required
+                       placeholder="example@email.com"
+                       class="input-control" />
+              </div>
+              <p class="error-text">Please enter a valid email.</p>
+            </div>
+
+            <!-- Password -->
+            <div class="field" data-field>
+              <label for="signUpPassword" class="block text-gray-700 font-medium mb-1">Password</label>
+              <div class="input-row">
+                <span class="input-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                          d="M16.5 10.5V7.5a4.5 4.5 0 0 0-9 0v3" />
+                    <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                  </svg>
+                </span>
+                <input id="signUpPassword" name="password" type="password" required minlength="8"
+                       placeholder="••••••••"
+                       class="input-control" />
+              </div>
+              <p class="error-text">At least 8 characters.</p>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="field" data-field>
+              <label for="signUpConfirmPassword" class="block text-gray-700 font-medium mb-1">Confirm Password</label>
+              <div class="input-row">
+                <span class="input-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                          d="M16.5 10.5V7.5a4.5 4.5 0 0 0-9 0v3" />
+                    <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                  </svg>
+                </span>
+                <input id="signUpConfirmPassword" name="confirmPassword" type="password" required minlength="8"
+                       placeholder="••••••••"
+                       class="input-control" />
+              </div>
+              <p class="error-text">Please confirm your password.</p>
+            </div>
+
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg shadow-md hover:shadow-lg transition">Sign Up</button>
+          </form>
+
+          <!-- Social -->
+          <div class="mt-6">
+            <p class="text-center text-gray-500">Or continue with</p>
+            <div class="mt-4 flex space-x-3">
+              <button class="flex-1 bg-gray-100 hover:bg-gray-200 transition p-3 rounded-lg flex items-center justify-center" type="button" aria-label="Continue with Facebook">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" class="h-5" alt="Facebook" />
+              </button>
+              <button class="flex-1 bg-gray-100 hover:bg-gray-200 transition p-3 rounded-lg flex items-center justify-center" type="button" aria-label="Continue with GitHub">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" class="h-5" alt="GitHub" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right, responsive video panel -->
+      <aside class="relative hidden md:block">
+        <video
+          class="absolute inset-0 h-full w-full object-cover object-center pointer-events-none"
+          src="/assets/videos/login/login-background.mp4"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/assets/images/login/login-background.jpg"
+          aria-hidden="true">
+        </video>
+        <div class="pointer-events-none absolute inset-y-0 left-0 w-24 to-stone-50/80"></div>
+      </aside>
+    </div>
+
+    <script type="module" src="/assets/js/pages/login.js"></script>
+  </body>
+</html>
